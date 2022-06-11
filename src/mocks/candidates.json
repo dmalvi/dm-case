@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "firstName": "User",
+    "lastName": "Number 01",
+    "age": 32,
+    "email": "some@email.com",
+    "address": "mock street 44, 123 44 sweden",
+    "status": "kontakt",
+    "active": false
+  },
+  {
+    "id": 2,
+    "firstName": "User",
+    "lastName": "Number 02",
+    "age": 32,
+    "email": "some@email.com",
+    "address": "mock street 44, 123 44 sweden",
+    "status": "kontakt",
+    "active": true
+  },
+  {
+    "id": 3,
+    "firstName": "User",
+    "lastName": "Number 03",
+    "age": 32,
+    "email": "some@email.com",
+    "address": "mock street 44, 123 44 sweden",
+    "status": "dialog",
+    "active": true
+  },
+  {
+    "id": 4,
+    "firstName": "User",
+    "lastName": "Number 04",
+    "age": 32,
+    "email": "some@email.com",
+    "address": "mock street 44, 123 44 sweden",
+    "status": "intervju",
+    "active": true
+  },
+  {
+    "id": 5,
+    "firstName": "User",
+    "lastName": "Number 05",
+    "age": 32,
+    "email": "some@email.com",
+    "address": "mock street 44, 123 44 sweden",
+    "status": "avslutad",
+    "active": true
+  }
+]
