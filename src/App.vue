@@ -14,14 +14,14 @@
           v-model="searchString"
           name="search"
           type="text"
-          class="p-2 w-full rounded-md"
+          class="p-2 w-full rounded-md border-0"
           placeholder="Sök bland kandidater"
           autocomplete="off"
         />
         <input
           type="submit"
           value="Sök"
-          class="py-1 px-8 mt-4 rounded-md bg-white border border-solid border-sky-800"
+          class="py-1 px-8 mt-4 rounded-md bg-white"
         />
       </form>
     </div>
@@ -147,7 +147,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -157,10 +157,10 @@ export default {
 }
 
 .search-bar {
-  animation: slide 0.7s ease;
+  animation: slide-top 0.7s ease;
 }
 
-@keyframes slide {
+@keyframes slide-top {
   0% {
     opacity: 0;
     transform: translateY(-120px);
@@ -169,5 +169,15 @@ export default {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+input {
+  @apply border border-solid border-sky-800;
+}
+
+.modal {
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

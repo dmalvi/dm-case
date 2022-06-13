@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="fixed z-10 top-0 w-full h-full bg-black opacity-50 cursor-pointer" @click="closeModal" />
+    <div
+      class="fixed z-10 top-0 w-full h-full bg-black opacity-50 cursor-pointer"
+      @click="closeModal"
+    />
     <div
       class="modal z-20 fixed p-4 bg-white w-4/5 md:w-3/5 rounded-md drop-shadow-md"
     >
@@ -118,15 +121,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.modal {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-input {
-  @apply border border-solid border-gray-400;
-}
-</style>
