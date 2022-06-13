@@ -1,13 +1,13 @@
 <template>
   <div class="candidate-menu bg-white h-20">
-    <ul class="grid grid-cols-2">
-      <li class="p-2" @click="$emit('editCandidate')">Redigera</li>
-      <li class="p-2" @click="$emit('toggleActiveStatus')">{{ isActive ? 'Pausa' : 'Aktivera' }}</li>
-    </ul>
-    <ul class="grid grid-cols-2">
-      <li class="p-2" @click="$emit('updateStatus')">Flytta</li>
-      <li class="p-2" @click="$emit('deleteCandidate')">Radera</li>
-    </ul>
+    <div class="grid grid-cols-2">
+      <button class="p-2" @click.stop="$emit('editCandidate')">Redigera</button>
+      <button class="p-2" @click.stop="$emit('toggleActiveStatus')">{{ isActive ? 'Pausa' : 'Aktivera' }}</button>
+    </div>
+    <div class="grid grid-cols-2">
+      <button class="p-2" @click.stop="$emit('updateStatus')">Flytta</button>
+      <button class="p-2" @click.stop="$emit('deleteCandidate')">Radera</button>
+    </div>
   </div>
 </template>
 

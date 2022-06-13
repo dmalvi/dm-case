@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="fixed top-0 w-full h-full bg-black opacity-50" />
+    <div class="fixed z-10 top-0 w-full h-full bg-black opacity-50 cursor-pointer" @click="closeModal" />
     <div
-      class="modal fixed p-4 bg-white w-4/5 md:w-3/5 rounded-md drop-shadow-md"
+      class="modal z-20 fixed p-4 bg-white w-4/5 md:w-3/5 rounded-md drop-shadow-md"
     >
       <h1 class="font-bold mb-2">{{ title }}</h1>
-      <form class="flex flex-col gap-2 p-4" action="">
+      <form class="flex flex-col gap-2 p-4 text-sm" action="">
         <div class="grid grid-cols-3">
           <label for="first-name" class="text-start">Förnamn: </label>
           <input
@@ -26,7 +26,7 @@
         </div>
         <div class="grid grid-cols-3">
           <label for="age" class="text-start">Ålder: </label>
-          <input v-model="formData.age" class="pl-2" name="age" type="number" />
+          <input v-model="formData.age" class="pl-2" name="age" type="text" />
         </div>
         <div class="grid grid-cols-3">
           <label for="email" class="text-start">E-mail: </label>
@@ -49,7 +49,7 @@
       </form>
       <div class="flex justify-between">
         <AppButton label="Avbryt" type="danger" @click="closeModal" />
-        <AppButton label="Spara" @click="saveCandidate" />
+        <AppButton label="Spara" type="confirm" @click="saveCandidate" />
       </div>
     </div>
   </div>
@@ -62,16 +62,6 @@ export default {
   name: "CandidateModal",
   components: {
     AppButton,
-  },
-  props: {
-    // candidate: {
-    //   type: Object,
-    //   default: () => {},
-    // },
-    // isEditMode: {
-    //   type: Boolean,
-    //   default: false,
-    // },
   },
   data() {
     return {
@@ -89,7 +79,7 @@ export default {
       return !!this.$store.state.candidateToEdit;
     },
     title() {
-      return this.isEditMode ? 'Redigera kandidat' : 'Lägg till kandidat';
+      return this.isEditMode ? "Redigera kandidat" : "Lägg till kandidat";
     },
   },
   mounted() {
@@ -108,7 +98,6 @@ export default {
           ...this.formData,
         };
         this.$store.dispatch("editCandidate", updatedCandidate);
-        console.log("SAVED EDIT");
       } else {
         // TODO: validate form data
         const newCandidate = {
@@ -120,7 +109,6 @@ export default {
           created: new Date(),
         };
         this.$store.commit("addCandidate", newCandidate);
-        console.log("SAVED NEW");
       }
       this.closeModal();
     },

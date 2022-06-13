@@ -1,7 +1,17 @@
 <template>
-  <div class="p-2 w-full bg-white flex justify-between items-center">
-    <AppButton label="SÖK" class="w-20" size="small" @click="$emit('toggleSearchBar')" />
-    <h1 class="text-md font-bold">{{ title }}</h1>
+  <div class="z-10 p-2 w-full bg-white flex justify-between items-center">
+    <AppButton
+      label="SÖK"
+      class="w-20"
+      size="small"
+      @click="$emit('toggleSearchBar')"
+    />
+    <img
+      alt="logo"
+      src="../assets/logo.png"
+      class="mt-1 w-32"
+      @click="$emit('clearSearchResult')"
+    />
     <AppButton label="LÄGG TILL" class="w-20" size="small" @click="openModal" />
   </div>
 </template>
@@ -27,11 +37,10 @@ export default {
   },
   methods: {
     openModal() {
-      this.$store.dispatch('toggleCandidateModal', { visibility: true })
+      this.$store.dispatch("toggleCandidateModal", { visibility: true });
     },
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

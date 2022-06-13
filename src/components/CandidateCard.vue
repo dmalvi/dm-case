@@ -1,6 +1,9 @@
 <template>
-  <div class="grid grid-cols-5 rounded-md drop-shadow-md bg-white p-2">
-    <div class="">
+  <div
+    class="grid grid-cols-5 rounded-md cursor-pointer drop-shadow-md bg-white p-2"
+    @click="showDetails"
+  >
+    <div>
       <div
         class="w-16 h-16 bg-sky-800 rounded-full flex"
         :class="{ 'bg-gray-400': isInactive }"
@@ -11,29 +14,26 @@
       </div>
     </div>
     <div
-      class="col-span-3 flex flex-col justify-center"
+      class="ml-4 col-span-3 flex flex-col justify-center text-xs"
       :class="{ 'text-gray-400': isInactive }"
     >
-      <span class="text-md font-bold"
+      <span class="text-base font-bold"
         >{{ candidate.firstName }} {{ candidate.lastName }}</span
       >
-      <span v-if="!isSearchResult" class="text-xs"
-        >Uppdaterad: {{ dateStatus }}</span
-      >
-      <span v-else class="text-xs"
-        >Nuvarande steg: {{ candidate.status.toUpperCase() }}</span
-      >
+      <span v-if="!isSearchResult" class="italic">{{ dateStatus }}</span>
+      <span v-else>Nuvarande steg: {{ candidate.status.toUpperCase() }}</span>
+      <span v-if="isInactive">(Ej aktiv)</span>
     </div>
     <div class="flex flex-col justify-between items-end">
-      <div class="w-6" @click="toggleMenu">
+      <button v-if="!isTerminated" class="w-6" @click.stop="toggleMenu">
         <img src="../assets/dots.svg" class="w-6" />
-      </div>
-      <div v-if="!isInactive" class="w-6" @click="updateStatus">
+      </button>
+      <button v-if="!isTerminated" class="w-6" @click.stop="updateStatus">
         <img src="../assets/next-step.svg" class="w-6" />
-      </div>
-      <div v-else class="w-6" @click="deleteCandidate">
+      </button>
+      <button v-else class="w-6" @click.stop="deleteCandidate">
         <img src="../assets/x.svg" class="w-6" />
-      </div>
+      </button>
     </div>
     <CandidateMenu
       v-if="isMenuVisible"
@@ -77,12 +77,20 @@ export default {
   },
   computed: {
     isInactive() {
-      return this.candidate.status === "avslutad" || !this.candidate.active;
+      return this.isTerminated || !this.candidate.active;
+    },
+    isTerminated() {
+      return this.candidate.status === "avslutad";
     },
     dateStatus() {
-      // TODO: compare created vs updated and display most recent
-      const updated = new Date();
-      return updated.toLocaleDateString();
+      if (
+        Date.parse(this.candidate.created) ===
+          Date.parse(this.candidate.updated) &&
+        this.candidate.status === this.$store.state.statuses[0]
+      ) {
+        return `Skapad: ${this.candidate.created.toLocaleDateString()}`;
+      }
+      return `Uppdaterad: ${this.candidate.updated.toLocaleDateString()}`;
     },
   },
   methods: {
@@ -119,6 +127,12 @@ export default {
     },
     toggleMenu() {
       this.isMenuVisible = !this.isMenuVisible;
+    },
+    showDetails() {
+      this.$store.dispatch("toggleDetailsModal", {
+        visibility: true,
+        data: this.candidate,
+      });
     },
   },
 };

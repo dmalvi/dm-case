@@ -9,12 +9,24 @@ const store = new Vuex.Store({
     candidates: [],
     isCandidateModalVisible: false,
     confirmationModal: {
-      visibility: false, 
+      visibility: false,
+      data: null,
+    },
+    detailsModal: {
+      visibility: false,
       data: null,
     },
     candidateToEdit: null,
   },
   mutations: {
+    setInitialCandidates(state, payload) {
+      state.candidates = payload.map((candidate, index) => ({
+        ...candidate,
+        created: new Date(Date.parse(candidate.created || "2022-06-10")),
+        updated: new Date(Date.parse(candidate.created || "2022-06-10")),
+        id: index + 1,
+      }));
+    },
     setCandidates(state, payload) {
       state.candidates = payload;
     },
@@ -39,12 +51,21 @@ const store = new Vuex.Store({
     setConfirmationModal(state, payload) {
       state.confirmationModal = payload;
     },
+    setDetailsModal(state, payload) {
+      state.detailsModal = payload;
+    },
   },
   actions: {
     editCandidate({ commit, state }, payload) {
       const updatedCandidates = state.candidates.map((candidate) => {
         if (candidate.id === payload.id) {
-          return { ...payload, updated: new Date() };
+          return {
+            ...payload,
+            updated:
+              candidate.status !== payload.status
+                ? new Date()
+                : candidate.updated,
+          };
         } else {
           return candidate;
         }
@@ -53,7 +74,9 @@ const store = new Vuex.Store({
       commit("setCandidates", updatedCandidates);
     },
     deleteCandidate({ commit, state }, payload) {
-      const updatedCandidates = state.candidates.filter((candidate) => candidate.id !== payload.id);
+      const updatedCandidates = state.candidates.filter(
+        (candidate) => candidate.id !== payload.id
+      );
       commit("setCandidates", updatedCandidates);
     },
     toggleCandidateModal({ commit }, payload) {
@@ -62,37 +85,15 @@ const store = new Vuex.Store({
     toggleConfirmationModal({ commit }, payload) {
       commit("setConfirmationModal", payload);
     },
+    toggleDetailsModal({ commit }, payload) {
+      commit("setDetailsModal", payload);
+    },
   },
   getters: {
-    contactCandidates: (state) => {
-      return state.candidates.filter(
-        (candidate) => candidate.status === "kontakt"
-      );
-    },
-    dialogCandidates: (state) => {
-      return state.candidates.filter(
-        (candidate) => candidate.status === "dialog"
-      );
-    },
-    interviewCandidates: (state) => {
-      return state.candidates.filter(
-        (candidate) => candidate.status === "intervju"
-      );
-    },
-    contractCandidates: (state) => {
-      return state.candidates.filter(
-        (candidate) => candidate.status === "erbjudande"
-      );
-    },
-    terminatedCandidates: (state) => {
-      return state.candidates.filter(
-        (candidate) => candidate.status === "avslutad"
-      );
-    },
     filteredCandidates: (state) => (status) => {
-      return state.candidates.filter(
-        (candidate) => candidate.status === status
-      );
+      return state.candidates
+        .filter((candidate) => candidate.status === status)
+        .sort((a, b) => a.updated - b.updated);
     },
     searchCandidates: (state) => (searchString) => {
       return state.candidates.filter(
@@ -100,6 +101,7 @@ const store = new Vuex.Store({
           candidate.firstName.toLowerCase().includes(searchString) ||
           candidate.lastName.toLowerCase().includes(searchString) ||
           candidate.address.toLowerCase().includes(searchString) ||
+          candidate.status.toLowerCase().includes(searchString) ||
           candidate.email.toLowerCase().includes(searchString)
       );
     },
