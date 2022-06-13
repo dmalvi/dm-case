@@ -25,10 +25,10 @@
       <span v-if="isInactive">(Ej aktiv)</span>
     </div>
     <div class="flex flex-col justify-between items-end">
-      <button v-if="!isTerminated" class="w-6" @click.stop="toggleMenu">
+      <button v-if="!isTerminated" class="w-6 h-1/2" @click.stop="toggleMenu">
         <img src="../assets/dots.svg" class="w-6" />
       </button>
-      <button v-if="!isTerminated" class="w-6" @click.stop="updateStatus">
+      <button v-if="!isTerminated" class="w-6 h-1/2" @click.stop="updateStatus">
         <img src="../assets/next-step.svg" class="w-6" />
       </button>
       <button v-else class="w-6" @click.stop="deleteCandidate">
