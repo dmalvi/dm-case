@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     openModal() {
-      this.$store.dispatch("toggleCandidateModal", { visibility: true });
+      this.$store.dispatch("toggleCandidateEditModal", { visibility: true });
     },
   },
 };

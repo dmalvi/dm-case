@@ -62,7 +62,7 @@
 import AppButton from "./Button.vue";
 
 export default {
-  name: "CandidateModal",
+  name: "CandidateEditModal",
   components: {
     AppButton,
   },
@@ -116,7 +116,7 @@ export default {
       this.closeModal();
     },
     closeModal() {
-      this.$store.dispatch("toggleCandidateModal", { visibility: false });
+      this.$store.dispatch("toggleCandidateEditModal", { visibility: false });
     },
   },
 };

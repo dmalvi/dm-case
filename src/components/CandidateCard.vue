@@ -110,7 +110,7 @@ export default {
       });
     },
     editCandidate() {
-      this.$store.dispatch("toggleCandidateModal", {
+      this.$store.dispatch("toggleCandidateEditModal", {
         visibility: true,
         candidate: this.candidate,
       });

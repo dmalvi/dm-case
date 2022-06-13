@@ -57,7 +57,7 @@
       />
       <div class="pb-80" />
     </div>
-    <CandidateModal v-if="$store.state.isCandidateModalVisible" />
+    <CandidateEditModal v-if="$store.state.isCandidateModalVisible" />
     <ConfirmationModal v-if="$store.state.confirmationModal.visibility" />
     <CandidateDetailsModal v-if="$store.state.detailsModal.visibility" />
     <NavigationMenu @scrollToSection="scrollToSection" />
@@ -68,7 +68,7 @@
 import Header from "./components/Header.vue";
 import NavigationMenu from "./components/NavigationMenu.vue";
 import Section from "./components/Section.vue";
-import CandidateModal from "./components/CandidateModal.vue";
+import CandidateEditModal from "./components/CandidateEditModal.vue";
 import ConfirmationModal from "./components/ConfirmationModal.vue";
 import CandidateDetailsModal from "./components/CandidateDetailsModal.vue";
 import CandidateCard from "./components/CandidateCard.vue";
@@ -84,7 +84,7 @@ export default {
   components: {
     Header,
     Section,
-    CandidateModal,
+    CandidateEditModal,
     ConfirmationModal,
     CandidateCard,
     NavigationMenu,

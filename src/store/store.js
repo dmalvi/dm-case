@@ -85,7 +85,7 @@ const store = new Vuex.Store({
       );
       commit("setCandidates", updatedCandidates);
     },
-    toggleCandidateModal({ commit }, payload) {
+    toggleCandidateEditModal({ commit }, payload) {
       commit("setCandidateModal", payload);
     },
     toggleConfirmationModal({ commit }, payload) {
