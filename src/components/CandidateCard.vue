@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-5 rounded-md cursor-pointer drop-shadow-md bg-white p-2"
+    class="relative grid grid-cols-5 rounded-md cursor-pointer drop-shadow-md bg-white p-2"
     @click="showDetails"
   >
     <div>
