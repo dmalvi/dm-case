@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="flex flex-col h-screen bg-sky-200">
+  <div id="app" class="flex flex-col h-screen overflow-hidden bg-sky-200">
     <Header
       :sections="sections"
       @scrollToSection="scrollToSection"
@@ -46,13 +46,14 @@
         class="mb-2"
       />
     </div>
-    <div v-else class="overflow-scroll grow pb-96">
+    <div v-else class="overflow-y-scroll">
       <Section
         v-for="(section, index) of sections"
         :key="index"
         :id="section"
         :section-name="section"
       />
+      <div class="min-h-full" />
     </div>
     <CandidateModal v-if="$store.state.isCandidateModalVisible" />
     <ConfirmationModal v-if="$store.state.confirmationModal.visibility" />
@@ -74,11 +75,7 @@ import { mapState } from "vuex";
 
 const SCROLL_OPTIONS = {
   behavior: "smooth",
-  block: "start",
-  inline: "start",
 };
-
-// TODO: create landing page
 
 export default {
   name: "App",
@@ -114,9 +111,9 @@ export default {
       this.searchResult = null;
       this.isSearchBarVisible = false;
     },
-    async scrollToSection(value) {
+    async scrollToSection(section) {
       await this.clearSearchResult();
-      document.getElementById(value).scrollIntoView(SCROLL_OPTIONS);
+      document.getElementById(section).scrollIntoView(SCROLL_OPTIONS);
     },
     toggleSearchBar() {
       this.isSearchBarVisible = !this.isSearchBarVisible;
