@@ -46,14 +46,14 @@
         class="mb-2"
       />
     </div>
-    <div v-else class="overflow-y-scroll">
+    <div v-else class="overflow-y-scroll pb-96">
       <Section
         v-for="(section, index) of sections"
         :key="index"
         :id="section"
         :section-name="section"
       />
-      <div class="min-h-full" />
+      <div class="pb-80" />
     </div>
     <CandidateModal v-if="$store.state.isCandidateModalVisible" />
     <ConfirmationModal v-if="$store.state.confirmationModal.visibility" />
