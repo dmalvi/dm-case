@@ -7,7 +7,6 @@ const store = new Vuex.Store({
   state: {
     statuses: ["kontakt", "dialog", "intervju", "erbjudande", "avslutad"],
     candidates: [],
-    isCandidateModalVisible: false,
     confirmationModal: {
       visibility: false,
       data: null,
@@ -16,7 +15,10 @@ const store = new Vuex.Store({
       visibility: false,
       data: null,
     },
-    candidateToEdit: null,
+    editModal: {
+      visibility: false,
+      candidate: null,
+    },
     recentlyEditedCandidate: null,
   },
   mutations: {
@@ -41,13 +43,8 @@ const store = new Vuex.Store({
       );
       state.candidates = updatedCandidates;
     },
-    setCandidateModal(state, payload) {
-      if (payload.candidate) {
-        state.candidateToEdit = payload.candidate;
-      } else {
-        state.candidateToEdit = null;
-      }
-      state.isCandidateModalVisible = payload.visibility;
+    setCandidateEditModal(state, payload) {
+      state.editModal = payload;
     },
     setConfirmationModal(state, payload) {
       state.confirmationModal = payload;
@@ -86,7 +83,7 @@ const store = new Vuex.Store({
       commit("setCandidates", updatedCandidates);
     },
     toggleCandidateEditModal({ commit }, payload) {
-      commit("setCandidateModal", payload);
+      commit("setCandidateEditModal", payload);
     },
     toggleConfirmationModal({ commit }, payload) {
       commit("setConfirmationModal", payload);

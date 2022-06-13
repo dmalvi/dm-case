@@ -57,7 +57,7 @@
       />
       <div class="pb-80" />
     </div>
-    <CandidateEditModal v-if="$store.state.isCandidateModalVisible" />
+    <CandidateEditModal v-if="$store.state.editModal.visibility" />
     <ConfirmationModal v-if="$store.state.confirmationModal.visibility" />
     <CandidateDetailsModal v-if="$store.state.detailsModal.visibility" />
     <NavigationMenu @scrollToSection="scrollToSection" />

@@ -79,15 +79,14 @@ export default {
   },
   computed: {
     isEditMode() {
-      return !!this.$store.state.candidateToEdit;
+      return !!this.$store.state.editModal.candidate;
     },
     title() {
       return this.isEditMode ? "Redigera kandidat" : "Lägg till kandidat";
     },
   },
   mounted() {
-    // TODO: refactor to same logic as confirmation modal
-    const candidate = this.$store.state.candidateToEdit;
+    const candidate = this.$store.state.editModal.candidate;
     if (candidate) {
       this.formData = {
         ...candidate,
@@ -116,7 +115,10 @@ export default {
       this.closeModal();
     },
     closeModal() {
-      this.$store.dispatch("toggleCandidateEditModal", { visibility: false });
+      this.$store.dispatch("toggleCandidateEditModal", {
+        visibility: false,
+        candidate: null,
+      });
     },
   },
 };
