@@ -8,7 +8,7 @@
       class="modal z-20 fixed p-4 bg-white w-4/5 md:w-3/5 rounded-md drop-shadow-md"
     >
       <h1 class="font-bold mb-2">{{ title }}</h1>
-      <form class="flex flex-col gap-2 p-4 text-sm">
+      <form class="flex flex-col gap-2 px-4 text-sm">
         <div class="grid grid-cols-3">
           <label for="first-name" class="text-start">Förnamn: </label>
           <input
@@ -16,6 +16,7 @@
             name="first-name"
             type="text"
             class="col-span-2 pl-2"
+            required
           />
         </div>
         <div class="grid grid-cols-3">
@@ -25,11 +26,18 @@
             name="last-name"
             type="text"
             class="col-span-2 pl-2"
+            required
           />
         </div>
         <div class="grid grid-cols-3">
           <label for="age" class="text-start">Ålder: </label>
-          <input v-model="formData.age" class="pl-2" name="age" type="text" />
+          <input
+            v-model="formData.age"
+            class="pl-2"
+            name="age"
+            type="number"
+            required
+          />
         </div>
         <div class="grid grid-cols-3">
           <label for="email" class="text-start">E-mail: </label>
@@ -38,6 +46,7 @@
             name="email"
             type="email"
             class="col-span-2 pl-2"
+            required
           />
         </div>
         <div class="grid grid-cols-3">
@@ -47,9 +56,15 @@
             name="address"
             type="text"
             class="col-span-2 pl-2"
+            required
           />
         </div>
       </form>
+      <div class="h-10 p-2">
+        <span v-if="validationError" class="text-red-600 text-sm"
+          >Vänligen fyll i alla fält</span
+        >
+      </div>
       <div class="flex justify-between">
         <AppButton label="Avbryt" type="danger" @click="closeModal" />
         <AppButton label="Spara" type="confirm" @click="saveCandidate" />
@@ -75,6 +90,7 @@ export default {
         email: "",
         address: "",
       },
+      validationError: false,
     };
   },
   computed: {
@@ -95,13 +111,17 @@ export default {
   },
   methods: {
     saveCandidate() {
+      this.validationError = Object.values(this.formData).some(
+        (value) => value.trim() === ""
+      );
+      if (this.validationError) return;
+
       if (this.isEditMode) {
         const updatedCandidate = {
           ...this.formData,
         };
         this.$store.dispatch("editCandidate", updatedCandidate);
       } else {
-        // TODO: validate form data
         const newCandidate = {
           ...this.formData,
           id: this.$store.state.candidates.length + 1,
