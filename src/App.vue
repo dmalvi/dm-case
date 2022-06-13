@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="flex flex-col h-screen overflow-hidden bg-sky-200">
     <Header
-      :sections="sections"
       @scrollToSection="scrollToSection"
       @toggleSearchBar="toggleSearchBar"
       @clearSearchResult="clearSearchResult"

@@ -32,11 +32,6 @@ import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "NavigationMenu",
-  components: {},
-  props: {},
-  data() {
-    return {};
-  },
   computed: {
     ...mapState({
       sections: (state) => state.statuses,
@@ -47,5 +42,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

@@ -1,5 +1,7 @@
 <template>
-  <div class="z-10 p-2 w-full min-h-fit bg-white flex justify-between items-center">
+  <div
+    class="z-10 p-2 w-full min-h-fit bg-white flex justify-between items-center"
+  >
     <AppButton
       label="SÖK"
       class="w-20"
@@ -24,17 +26,6 @@ export default {
   components: {
     AppButton,
   },
-  props: {
-    sections: {
-      type: Array,
-      default: () => [],
-    },
-  },
-  data() {
-    return {
-      title: "Kandidaterna",
-    };
-  },
   methods: {
     openModal() {
       this.$store.dispatch("toggleCandidateModal", { visibility: true });
@@ -42,5 +33,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

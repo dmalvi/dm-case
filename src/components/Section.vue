@@ -32,6 +32,7 @@
 
 <script>
 import CandidateCard from "./CandidateCard.vue";
+
 export default {
   name: "AppSection",
   components: {

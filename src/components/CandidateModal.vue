@@ -5,7 +5,7 @@
       class="modal z-20 fixed p-4 bg-white w-4/5 md:w-3/5 rounded-md drop-shadow-md"
     >
       <h1 class="font-bold mb-2">{{ title }}</h1>
-      <form class="flex flex-col gap-2 p-4 text-sm" action="">
+      <form class="flex flex-col gap-2 p-4 text-sm">
         <div class="grid grid-cols-3">
           <label for="first-name" class="text-start">Förnamn: </label>
           <input

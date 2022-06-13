@@ -3,15 +3,13 @@
     class="relative grid grid-cols-5 rounded-md cursor-pointer drop-shadow-md bg-white p-2"
     @click="showDetails"
   >
-    <div>
-      <div
-        class="w-16 h-16 bg-sky-800 rounded-full flex"
-        :class="{ 'bg-gray-400': isInactive }"
-      >
-        <span class="text-xl font-bold m-auto text-white">
-          {{ candidate.firstName[0] + candidate.lastName[0] }}
-        </span>
-      </div>
+    <div
+      class="w-16 h-16 bg-sky-800 rounded-full flex"
+      :class="{ 'bg-gray-400': isInactive }"
+    >
+      <span class="text-xl font-bold m-auto text-white">
+        {{ candidate.firstName[0] + candidate.lastName[0] }}
+      </span>
     </div>
     <div
       class="ml-4 col-span-3 flex flex-col justify-center text-xs"
@@ -137,5 +135,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
