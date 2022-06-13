@@ -6,7 +6,10 @@
       @toggleSearchBar="toggleSearchBar"
       @clearSearchResult="clearSearchResult"
     />
-    <div v-if="isSearchBarVisible" class="search-bar flex flex-col py-4 px-6">
+    <div
+      v-if="isSearchBarVisible"
+      class="search-bar flex flex-col min-h-fit py-4 px-6"
+    >
       <form @submit.prevent="makeSearch">
         <input
           v-model="searchString"
@@ -92,24 +95,36 @@ export default {
     return {
       isModalVisible: false,
       isSearchBarVisible: false,
-      candidates: [],
       searchString: "",
       searchResult: null,
     };
   },
   mounted() {
-    this.candidates = mockData;
     this.$store.commit("setInitialCandidates", mockData);
+  },
+  watch: {
+    recentlyEditedCandidate(newValue) {
+      if (newValue && this.searchResult?.length) {
+        this.updateSearchResult(newValue);
+      }
+    },
   },
   computed: {
     ...mapState({
       sections: (state) => state.statuses,
+      recentlyEditedCandidate: (state) => state.recentlyEditedCandidate,
     }),
   },
   methods: {
     clearSearchResult() {
       this.searchResult = null;
       this.isSearchBarVisible = false;
+    },
+    updateSearchResult(edited) {
+      const updatedResult = this.searchResult.map(candidate => {
+        return candidate.id === edited.id ? edited : candidate;
+      });
+      this.searchResult = updatedResult;
     },
     async scrollToSection(section) {
       await this.clearSearchResult();

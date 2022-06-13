@@ -17,6 +17,7 @@ const store = new Vuex.Store({
       data: null,
     },
     candidateToEdit: null,
+    recentlyEditedCandidate: null,
   },
   mutations: {
     setInitialCandidates(state, payload) {
@@ -54,18 +55,23 @@ const store = new Vuex.Store({
     setDetailsModal(state, payload) {
       state.detailsModal = payload;
     },
+    setRecentlyEditedCandidate(state, payload) {
+      state.recentlyEditedCandidate = payload
+    },
   },
   actions: {
     editCandidate({ commit, state }, payload) {
       const updatedCandidates = state.candidates.map((candidate) => {
         if (candidate.id === payload.id) {
-          return {
+          const updatedCandidate = {
             ...payload,
             updated:
               candidate.status !== payload.status
                 ? new Date()
                 : candidate.updated,
           };
+          commit("setRecentlyEditedCandidate", updatedCandidate);
+          return updatedCandidate;
         } else {
           return candidate;
         }
