@@ -35,7 +35,7 @@ const LABELS = {
 };
 
 export default {
-  name: "DetailsModal",
+  name: "CandidateDetailsModal",
   components: {
     AppButton,
   },

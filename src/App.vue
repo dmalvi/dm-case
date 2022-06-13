@@ -60,7 +60,7 @@
     </div>
     <CandidateModal v-if="$store.state.isCandidateModalVisible" />
     <ConfirmationModal v-if="$store.state.confirmationModal.visibility" />
-    <DetailsModal v-if="$store.state.detailsModal.visibility" />
+    <CandidateDetailsModal v-if="$store.state.detailsModal.visibility" />
     <NavigationMenu @scrollToSection="scrollToSection" />
   </div>
 </template>
@@ -71,7 +71,7 @@ import NavigationMenu from "./components/NavigationMenu.vue";
 import Section from "./components/Section.vue";
 import CandidateModal from "./components/CandidateModal.vue";
 import ConfirmationModal from "./components/ConfirmationModal.vue";
-import DetailsModal from "./components/DetailsModal.vue";
+import CandidateDetailsModal from "./components/CandidateDetailsModal.vue";
 import CandidateCard from "./components/CandidateCard.vue";
 import mockData from "./mocks/candidates.json";
 import { mapState } from "vuex";
@@ -89,11 +89,10 @@ export default {
     ConfirmationModal,
     CandidateCard,
     NavigationMenu,
-    DetailsModal,
+    CandidateDetailsModal,
   },
   data() {
     return {
-      isModalVisible: false,
       isSearchBarVisible: false,
       searchString: "",
       searchResult: null,
