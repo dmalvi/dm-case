@@ -97,6 +97,9 @@ export default {
       searchResult: null,
     };
   },
+  created() {
+    document.title = "Kandidaterna";
+  },
   mounted() {
     this.$store.commit("setInitialCandidates", mockData);
   },
@@ -119,7 +122,7 @@ export default {
       this.isSearchBarVisible = false;
     },
     updateSearchResult(edited) {
-      const updatedResult = this.searchResult.map(candidate => {
+      const updatedResult = this.searchResult.map((candidate) => {
         return candidate.id === edited.id ? edited : candidate;
       });
       this.searchResult = updatedResult;
