@@ -24,7 +24,7 @@
         v-for="(candidate, index) in candidates"
         :key="index"
         :candidate="candidate"
-        class="mb-2 ani-card"
+        class="mb-2 card-animation"
       />
     </div>
   </div>
@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style>
-.ani-card {
+.card-animation {
   animation: slide 0.7s ease;
 }
 
